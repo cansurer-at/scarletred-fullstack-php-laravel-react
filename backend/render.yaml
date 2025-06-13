@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: laravel-backend
+    env: docker
+    repo: https://github.com/cansurer-at/scarletred-fullstack-php-laravel-react
+    region: oregon
+    plan: free
+    dockerfilePath: backend/Dockerfile
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_DEBUG
+        value: false
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /var/www/database/database.sqlite
