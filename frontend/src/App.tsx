@@ -1,7 +1,7 @@
 // App.tsx
 import React, { useState } from "react";
 import AddTaskForm from "./components/AddTaskForm";
-import TaskList from "./components/TaskList";
+import TaskList from "./components/TaskList/TaskList";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";

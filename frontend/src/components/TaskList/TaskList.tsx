@@ -1,46 +1,23 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Task, fetchTasks, deleteTask, updateTaskStatus } from "../api/tasks";
+import { Edit, Trash2 } from "lucide-react";
+
+import {
+  Task,
+  fetchTasks,
+  deleteTask,
+  updateTaskStatus,
+} from "../../api/tasks";
 import { toast } from "react-toastify";
-import EditTaskModal from "./EditTaskModal"; // Modal bileşeni
+import EditTaskModal from "../EditTaskModal";
 
-const TaskItem = styled.li<{ completed: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  opacity: ${(props) => (props.completed ? 0.6 : 1)};
-  text-decoration: ${(props) => (props.completed ? "line-through" : "none")};
-  transition: all 0.3s ease;
-`;
-
-const Checkbox = styled.input`
-  margin-right: 10px;
-  transform: scale(1.3);
-  cursor: pointer;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const Button = styled.button`
-  padding: 4px 8px;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-`;
-
-const DeleteButton = styled(Button)`
-  background-color: #ff5c5c;
-`;
-
-const EditButton = styled(Button)`
-  background-color: #4caf50;
-`;
+import {
+  TaskItem,
+  StyledUl,
+  Checkbox,
+  ButtonGroup,
+  DeleteButton,
+  EditButton,
+} from "./styles";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -102,7 +79,7 @@ const TaskList = () => {
 
   return (
     <>
-      <ul>
+      <StyledUl>
         {tasks.map((task) => (
           <TaskItem key={task.id} completed={task.completed}>
             <div>
@@ -116,16 +93,23 @@ const TaskList = () => {
               {task.title}
             </div>
             <ButtonGroup>
-              <EditButton onClick={() => setSelectedTask(task)}>
-                Edit
+              <EditButton
+                onClick={() => setSelectedTask(task)}
+                aria-label="Edit task"
+              >
+                <Edit size={18} />
               </EditButton>
-              <DeleteButton onClick={() => handleDelete(task.id)}>
-                Delete
+              <DeleteButton
+                onClick={() => handleDelete(task.id)}
+                aria-label="Delete task"
+              >
+                <Trash2 size={18} />
               </DeleteButton>
             </ButtonGroup>
           </TaskItem>
         ))}
-      </ul>
+      </StyledUl>
+
       {selectedTask && (
         <EditTaskModal
           task={selectedTask}
