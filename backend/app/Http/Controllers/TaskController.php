@@ -26,21 +26,26 @@ class TaskController extends Controller
         return response()->json($task, 201);
     }
 
+   public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'completed' => 'boolean',
+    ]);
+
+    $task = Task::findOrFail($id);
+    $task->title = $request->title;
+    $task->completed = $request->completed;
+    $task->save();
+
+    return response()->json($task);
+}
+
     public function destroy($id)
-    {
-        $task = Task::findOrFail($id);
-        $task->delete();
+{
+    $task = Task::findOrFail($id);
+    $task->delete();
 
-        return response()->json(['message' => 'Task deleted successfully.']);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $task = Task::findOrFail($id);
-        $task->update([
-            'completed' => $request->completed,
-        ]);
-
-        return response()->json($task);
-    }
+    return response()->json(['message' => 'Task deleted successfully']);
+}
 }

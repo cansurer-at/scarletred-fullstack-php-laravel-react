@@ -56,8 +56,17 @@ export const deleteTask = async (id: number): Promise<void> => {
  */
 export const updateTaskStatus = async (
   id: number,
-  completed: boolean
+  completed: boolean,
+  title: string
 ): Promise<Task> => {
-  const response = await API.patch(`/tasks/${id}`, { completed });
+  const response = await API.patch(`/tasks/${id}`, { completed, title });
+  return response.data;
+};
+
+export const updateTask = async (
+  id: number,
+  updates: Partial<Pick<Task, "title" | "completed">>
+): Promise<Task> => {
+  const response = await API.patch(`/tasks/${id}`, updates);
   return response.data;
 };

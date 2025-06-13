@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { createTask } from "../api/tasks";
+import { toast } from "react-toastify";
 
 const Form = styled.form`
   display: flex;
@@ -31,9 +32,10 @@ const AddTaskForm: React.FC<Props> = ({ onTaskAdded }) => {
     try {
       await createTask(title);
       setTitle("");
+      toast.success("Task added successfully!", { autoClose: 3000 });
       onTaskAdded();
     } catch (error) {
-      console.error("Failed to add task:", error);
+      toast.error("Failed to add task. Please try again.", { autoClose: 3000 });
     }
   };
 
