@@ -1,15 +1,23 @@
-*.sqlite*
-
 # Laravel
 /backend/vendor
 /backend/node_modules
 /backend/public/storage
 /backend/storage/*.key
 /backend/.env
+/backend/storage
+# ⚠️ SQLite dosyasını dışlama!
+# (özellikle veritabanı olarak Railway'de kullanıyorsan)
+
+/backend/.idea
+/backend/.vscode
 
 # React
 /frontend/node_modules
 /frontend/build
+/frontend/.env
+/frontend/.DS_Store
+/frontend/.vscode
+/frontend/.idea
 
 # General
 .DS_Store
